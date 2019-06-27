@@ -1,0 +1,4 @@
+def versions = new Expando()
+def deps = new Expando()
+ext.versions = versions
+ext.deps = deps
