@@ -1,4 +1,4 @@
-package data.database
+package id.aasumitro.ktor.data
 
 import id.aasumitro.ktor.data.schemas.Persons
 import org.jetbrains.exposed.sql.*

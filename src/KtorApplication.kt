@@ -1,6 +1,6 @@
 package id.aasumitro.ktor
 
-import data.database.KtorDatabase
+import id.aasumitro.ktor.data.KtorDatabase
 
 fun main(args: Array<String>) {
     KtorDatabase()

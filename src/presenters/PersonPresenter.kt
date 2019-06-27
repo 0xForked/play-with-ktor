@@ -8,4 +8,6 @@ class PersonPresenter(
 
     suspend fun getPersons() = personRepository.getPersons()
 
+    suspend fun getPerson(id: Long) = personRepository.findPersonById(id)
+
 }

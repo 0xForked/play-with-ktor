@@ -16,5 +16,10 @@ fun Route.person(
         call.respondText(mPersons as String)
     }
 
+    get("/{personId}") {
+        val mPersonId = call.parameters["personId"]
+        val mPerson = personPresenter.getPerson(mPersonId?.toLong() as Long)
+        call.respondText(mPerson as String)
+    }
 
 }

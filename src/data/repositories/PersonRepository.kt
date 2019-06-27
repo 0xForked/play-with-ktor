@@ -3,7 +3,6 @@ package id.aasumitro.ktor.data.repositories
 import com.google.gson.Gson
 import org.jetbrains.exposed.sql.transactions.transaction
 import id.aasumitro.ktor.data.models.Person
-import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import id.aasumitro.ktor.data.schemas.Persons
@@ -22,9 +21,17 @@ class PersonRepository : PersonContract {
     }
 
     override suspend fun findPersonById(id: Long): String? {
-        val mPerson = Persons.select {
-            Persons.id eq id
-        }.first().let(ResultRow::toString)
+        var mPerson: Person? = null
+        transaction {
+            val row = Persons.select {
+                Persons.id eq id
+            }.single()
+            mPerson = Person(
+                row[Persons.id],
+                row[Persons.name],
+                row[Persons.email]
+            )
+        }
         return Gson().toJson(mPerson)
     }
 
@@ -40,7 +47,7 @@ class PersonRepository : PersonContract {
                 )
             }
         }
-        return  Gson().toJson(mPersons)
+        return Gson().toJson(mPersons)
     }
 
 }
